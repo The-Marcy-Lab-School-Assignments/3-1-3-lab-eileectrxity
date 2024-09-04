@@ -52,5 +52,14 @@ export default async function app(appDiv) {
     }
   });
 
-  // newUserFormEl.addEventListener('???', () => {})
-}
+  //feature 3- q3.1: create the new user
+  newUserFormEl.addEventListener('submit', async (e) => { //handling form submit event
+    e.preventDefault(); //preventing page from refreshing
+    const formObj = Object.fromEntries(new FormData(newUserFormEl));
+    // console.log(e, e.target, formObj);
+    formObj.isCool = Boolean(formObj.isCool);
+    await createNewUser(formObj)
+      .then((newUser) => renderNewUser(newUserEl, newUser)); //feature 3- q3.4: render the new user
+    newUserFormEl.reset(); //clearing form after submission
+  });
+};
