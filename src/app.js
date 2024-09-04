@@ -40,7 +40,16 @@ export default async function app(appDiv) {
   const authors = await getAuthor('/authors/OL22098A');
   console.log(authors);
 
-  // bookListEl.addEventListener('???', () => {})
+  //feature 2- q2.2: render the author
+  bookListEl.addEventListener('click', async (e) => { //using event delegation to handle events
+    // console.log(e, e.target);
+    if (e.target.tagName === 'BUTTON') { //technically don't need to check for this, see below (if el clicked is a button within the parent el)
+      // console.log(e.target.dataset.authorUrlKey); //debugging
+      let urlKey = e.target.dataset.authorUrlKey; //making the urlKey the key of whichever author was clicked, will only have a value if a button was clicked
+      await getAuthor(urlKey) //feature 2- q2.1: fetch the author
+        .then((author) => renderAuthorInfo(authorInfoEl, author));
+    }
+  });
 
   // newUserFormEl.addEventListener('???', () => {})
 }
