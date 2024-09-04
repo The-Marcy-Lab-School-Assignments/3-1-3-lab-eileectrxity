@@ -36,7 +36,7 @@ export default async function app(appDiv) {
   //feature 1- q1.2: render the books
   renderBookList(bookListEl, books);
 
-  //feature 2- q2.1: fetch the author
+  //testing feature 2- q2.1: fetch the author
   const authors = await getAuthor('/authors/OL22098A');
   console.log(authors);
 
