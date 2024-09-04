@@ -69,8 +69,71 @@ export const renderAuthorInfo = (authorInfoEl, author) => {
   authorInfoEl.append(authorName, authorImg, authorBirthDate, authorBio, authorWikiLink);
 };
 
+/* FEATURE 3 (section 3.2) - func should mutate the passed in form el adding specific html in it
+FUNCTION ARGS:
+ form: an html form el, this is what the func will modify
+EXPECTED FUNCTION OUTPUT:
+<form>
+  <label for="username">Username</label>
+  <input type="text" name="username" id="username">
+
+  <label for="is-cool">Is this user cool?</label>
+  <input type="checkbox" name="isCool" id="is-cool">
+
+  <label for="favorite-language">Favorite Language</label>
+  <select name="favoriteLanguage" id="favorite-language">
+    <option value="none">None</option>
+    <option value="javascript">JavaScript</option>
+    <option value="python">Python</option>
+    <option value="ruby">Ruby</option>
+  </select>
+  <button type="submit">Create User</button>
+</form>
+*/
 export const renderNewUserForm = (newUserFormEl) => {
-}
+  newUserFormEl.innerHTML = '';
+
+  const usernameLabel = document.createElement('label');
+  usernameLabel.htmlFor = 'username';
+  usernameLabel.textContent = 'Username';
+
+  const usernameInput = document.createElement('input');
+  usernameInput.id = 'username'; //alt method 1: directly assigning attributes, slightly faster than setAttribute() method
+  usernameInput.name = 'username';
+  usernameInput.type = 'text';
+
+  const isCoolLabel = document.createElement('label');
+  isCoolLabel.htmlFor = 'is-cool';
+  isCoolLabel.textContent = 'Is this user cool?';
+
+  const isCoolInput = document.createElement('input');
+  isCoolInput.setAttribute('id', 'is-cool'); //alt method 2: using setAttribute()
+  isCoolInput.setAttribute('name', 'isCool');
+  isCoolInput.setAttribute('type', 'checkbox');
+
+  const favLangLabel = document.createElement('label');
+  favLangLabel.htmlFor = 'favorite-language';
+  favLangLabel.textContent = 'Favorite Language';
+
+  const favLangSelect = document.createElement('select');
+  Object.assign(favLangSelect, { //alt method 3: using Object.assign() to set attributes
+    id: 'favorite-language',
+    name: 'favoriteLanguage',
+  });
+
+  const selection = ['None', 'JavaScript', 'Python', 'Ruby'];
+  selection.forEach((selection) => {
+    const option = document.createElement('option');
+    option.value = selection;
+    option.text = selection;
+    favLangSelect.add(option);
+  })
+
+  const submitButton = document.createElement('button');
+  submitButton.type = 'submit';
+  submitButton.textContent = 'Create User';
+  newUserFormEl.append(usernameLabel, usernameInput, isCoolLabel, isCoolInput, favLangLabel, favLangSelect, submitButton);
+};
 
 export const renderNewUser = (newUserEl, newUser) => {
 }
