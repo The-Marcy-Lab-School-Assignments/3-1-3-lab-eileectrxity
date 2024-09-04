@@ -135,5 +135,30 @@ export const renderNewUserForm = (newUserFormEl) => {
   newUserFormEl.append(usernameLabel, usernameInput, isCoolLabel, isCoolInput, favLangLabel, favLangSelect, submitButton);
 };
 
+/* FEATURE 3 (section 3.3) - func should mutate the passed in div el using the user obj to add specific html in it
+FUNCTION ARGS:
+ div: an html form el, this is what the func will modify
+ user: an obj aka the obj that createNewUser() returns
+EXPECTED FUNCTION OUTPUT:
+<!-- where obj could = {id: 11, username: 'test-user', isCool: true, favoriteLanguage: 'Python'} -->
+<div>
+  <h2>${user.username}</h2>
+  <p>isCool ? 'The hippest in the house!' : 'A real square.'</p>
+  <p>Favorite Language: ${user.favoriteLanguage}</p>
+  </div>
+*/
 export const renderNewUser = (newUserEl, newUser) => {
-}
+  newUserEl.innerHTML = '';
+
+  const headingEl = document.createElement('h2');
+  headingEl.textContent = newUser.username;
+  headingEl.dataset.userId = newUser.id;
+
+  const coolStatusEl = document.createElement('p');
+  coolStatusEl.textContent = newUser.isCool ? 'The hippest in the house!' : 'A real square.'; //if truthy : log this : else falsey, log that
+
+  const favLanguageEl = document.createElement('p');
+  favLanguageEl.textContent = `Favorite Language: ${newUser.favoriteLanguage}`;
+
+  newUserEl.append(headingEl, coolStatusEl, favLanguageEl);
+};
