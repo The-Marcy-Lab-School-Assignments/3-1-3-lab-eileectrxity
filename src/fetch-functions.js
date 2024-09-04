@@ -53,7 +53,50 @@ export const getFirstThreeFantasyBooks = async () => {
   }
 };
 
-export const getAuthor = () => {
+//FEATURE 2 (section 2.1) - func that takes in a urlKey (from getThreeFantasyBooks)
+// //q2.1 working solution with comments- IGNORE
+// export const getAuthor = async (urlKey) => {
+//   try {
+//     // console.log(urlKey); //debugging
+//     const response = await fetch(`${baseUrl}${urlKey}.json`);  //urlKey contains the route handle /authors/ so need to incorporate that
+//     // console.log(response.ok, response.status, response.statusText); //debugging
+//     if (!response.ok) throw new Error('Failed to get author');
+//     const data = await response.json();
+//     // console.log('data:', data); //logs an obj with the full author info
+//     const author = { //creating a new obj, accessing the response data through dot notation
+//       birthDate: data.birth_date,
+//       bio: data.bio,
+//       wikipediaUrl: data.wikipedia,
+//       name: data.name,
+//       pictureUrl: `https://covers.openlibrary.org/a/id/${data.photos[0]}-M.jpg`, //just getting the first photo
+//     }
+//     // console.log(author, author.bio, author.wikipediaUrl); //debugging
+//     return author; //returning the newly formatted author data obj
+//   }
+//   catch (err) {
+//     console.warn(`getAuthor() error! Message: ${err.message}`);
+//     return null;
+//   }
+// };
+
+//q2.1 simplified without comments
+export const getAuthor = async (urlKey) => {
+  try {
+    const response = await fetch(`${baseUrl}${urlKey}.json`);
+    if (!response.ok) throw new Error('Failed to get author');
+    const author = await response.json();
+    return {
+      birthDate: author.birth_date,
+      bio: author.bio,
+      wikipediaUrl: author.wikipedia,
+      name: author.name,
+      pictureUrl: `https://covers.openlibrary.org/a/id/${author.photos[0]}-M.jpg`,
+    }
+  }
+  catch (err) {
+    console.warn(`getAuthor() error! Message: ${err.message}`);
+    return null;
+  }
 };
 
 export const createNewUser = () => {
