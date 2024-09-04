@@ -99,5 +99,40 @@ export const getAuthor = async (urlKey) => {
   }
 };
 
-export const createNewUser = () => {
-}
+//FEATURE 3 (section 3.1) - func that takes in take in a user obj like this -> { username: 'Zo_Bro', isCool: true, favoriteLanguage: 'JavaScript' }
+// //q3.1 working solution with comments- IGNORE
+// export const createNewUser = async (user) => {
+//   try {
+//     const response = await fetch('https://jsonplaceholder.typicode.com/users', {
+//       method: 'POST', //specifying the HTTP method as POST rather than the default GET method
+//       headers: { 'content-type': 'application/json' }, //specifying the content type in the request header so the server knows what to expect + how to parse it
+//       body: JSON.stringify(user), //convert given user obj to JSON to be sent + transmitted in the request body- essentially posting the passed in new user info to the server's API/database
+//     });
+//     if (!response.ok) throw new Error('Failed to create new user');
+//     const data = await response.json();
+//     // console.log(data); //logs a new user obj with an id property assigned by the api server
+//     return data; //returning the newly posted user obj
+//   }
+//   catch (err) {
+//     console.warn(`createNewUser() error! Message: ${err.message}`);
+//     return null;
+//   }
+// };
+
+// //q3.1 solution simplified without comments
+export const createNewUser = async (user) => {
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/users', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(user),
+    });
+    if (!response.ok) throw new Error('Failed to create new user');
+    const newUser = await response.json();
+    return newUser;
+  }
+  catch (err) {
+    console.warn(`createNewUser() error! Message: ${err.message}`);
+    return null;
+  }
+};

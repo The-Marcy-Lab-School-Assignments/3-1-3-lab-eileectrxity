@@ -61,11 +61,11 @@
       "FrScTe8": 1,
       "FrScTe9": 1,
       "FrScTe10": 1,
-      "FrScTe11": 0,
-      "FrScTe12": 0,
-      "FrScTe13": 0,
-      "FrScTe14": 0,
-      "FrScTe15": 0,
+      "FrScTe11": 1,
+      "FrScTe12": 1,
+      "FrScTe13": 1,
+      "FrScTe14": 1,
+      "FrScTe15": 1,
       "FrScTe16": 1,
       "FrScTe17": 1,
       "FrScTe18": 0,
@@ -79,8 +79,8 @@
     }
   },
   "humanReadable": {
-    "From Scratch Tests": "12/19",
-    "finalTestScore": "FINAL SCORE: 14/23",
+    "From Scratch Tests": "17/19",
+    "finalTestScore": "FINAL SCORE: 19/23",
     "Modify Tests": "2/4"
   }
 }
