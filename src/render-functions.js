@@ -13,6 +13,7 @@ EXPECTED FUNCTION OUTPUT:
 export const renderBookList = (bookListEl, books) => {
   bookListEl.innerHTML = ''; //clearing el so that it's ready for the next rendering
 
+  const fragment = document.createDocumentFragment(); //creating a fragment, a temporary container that can hold a collection of DOM els, accumulating changes in memory before making a single update to the live DOM. its used to avoid costly DOM updates that can slow your site- to clarify, its not part of the live DOM and is discarded when appended to the real DOM.specifically using it here to avoid too many DOM reflows + repaints that would occur in the subsequent books iteration
   books.forEach((book) => {
     const li = document.createElement('li');
 
@@ -28,8 +29,10 @@ export const renderBookList = (bookListEl, books) => {
     button.dataset.authorUrlKey = book.author.urlKey;
 
     li.append(img, p, button);
-    bookListEl.appendChild(li);
+    fragment.appendChild(li); //appending to the fragment instead of the DOM
   });
+
+  bookListEl.appendChild(fragment); //now appending the fragment to the DOM. note- could also have just created a global fragment var for all the render functions to append to and then export that fragment into app.js to append it to the appDiv in main(), though not necessary here as any performance benefit would be negligible since there's not much DOM manipulation occurring in our small app
 };
 
 /* FEATURE 2 (section 2.2) - func should mutate the passed in div el adding specific tags

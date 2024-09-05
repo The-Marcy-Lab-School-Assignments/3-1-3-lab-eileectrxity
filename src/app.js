@@ -49,7 +49,7 @@ import {
 //       // console.log(e.target.dataset.authorUrlKey); //debugging
 //       let urlKey = e.target.dataset.authorUrlKey; //making the urlKey the key of whichever author was clicked, will only have a value if a button was clicked
 //       await getAuthor(urlKey) //feature 2- q2.1: fetch the author
-//         .then((author) => renderAuthorInfo(authorInfoEl, author));
+//         .then((author) => renderAuthorInfo(authorInfoEl, author)); //note: although this works, not best practice to mix .then() chains with async/await as its unnecessary and doesn't make sense- should have just done renderAuthorInfo(authorInfoEl, author) directly after the await statement (await is not an expression). async/await is syntactic sugar made to replace .then() while .then() is not syntactic sugar but part of the JS Promise API, used to allow us to attach callback functions to be executed when a promise resolves/rejects
 //     }
 //   });
 
@@ -58,7 +58,7 @@ import {
 //     e.preventDefault(); //preventing page from refreshing
 //     const formObj = Object.fromEntries(new FormData(newUserFormEl));
 //     // console.log(e, e.target, formObj);
-//     formObj.isCool = Boolean(formObj.isCool);
+//     formObj.isCool = Boolean(formObj.isCool); //note: technically don't need to convert checkbox values to a bool so that we can use it in our renderNewUser func (where we check for --> newUser.isCool ? '...' : '...'). reason being that if isCool is checked (value: "on"), JS will consider this value truthy + if not checked, formObj.isCool will be undefined because unchecked checkboxes are not included in the FormData obj. however, still good practice to keep this conversion rather than omit it as it relays intent, ensures consistency, and avoids ambiguity. while less redundant code is good practice, it shouldn't come at the cost of clarity and maintainability
 //     await createNewUser(formObj)
 //       .then((newUser) => renderNewUser(newUserEl, newUser)); //feature 3- q3.4: render the new user
 //     newUserFormEl.reset(); //clearing form after submission
